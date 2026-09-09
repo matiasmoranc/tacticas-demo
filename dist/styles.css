@@ -45,9 +45,12 @@ button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 .team-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--team); box-shadow: 0 0 18px var(--team); }
 .team-title h3 { margin: 0; font-size: 1.15rem; }
 .formation { color: var(--team); font-size: 1.3rem; font-weight: 950; letter-spacing: .08em; }
+.formation { white-space: nowrap; }
 .players { display: grid; gap: 10px; padding: 16px; }
 .player { padding: 14px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.025); cursor: pointer; transition: border-color .15s ease, transform .15s ease, background .15s ease; }
 .player.selected { border-color: var(--team); background: color-mix(in srgb, var(--team) 12%, transparent); transform: translateY(-2px); }
+.player.unplaced { border-style: dashed; }
+.player.placed { box-shadow: inset 3px 0 var(--team); }
 .player-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .player-name { font-weight: 850; }
 .natural { color: var(--muted); font-size: .76rem; }
@@ -62,6 +65,7 @@ button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 .formation-zone:hover, .formation-zone.ready { border-color: var(--team); background: rgba(255,255,255,.06); }
 .zone-label { position: absolute; top: 6px; left: 8px; font-size: .65rem; font-weight: 900; letter-spacing: .08em; }
 .pitch-player { margin-top: 11px; padding: 6px 8px; border-radius: 9px; color: #07110d; background: var(--team); font-size: .72rem; font-weight: 900; }
+.placement-count { margin: -4px 16px 14px; color: var(--muted); font-size: .76rem; font-weight: 800; text-align: center; }
 .warning { margin: 0 16px 16px; padding: 10px 12px; border-radius: 12px; color: #ffd4a5; background: rgba(255,145,77,.09); font-size: .78rem; }
 .power-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; padding: 0 16px 18px; }
 .power { padding: 11px 7px; border-radius: 13px; text-align: center; background: #0a1811; }
@@ -85,13 +89,24 @@ button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 .odds-card p { margin: 8px 0 0; color: var(--muted); font-size: .8rem; }
 .commentary-box { min-height: 72px; display: grid; place-items: center; margin-top: 14px; padding: 16px; border-radius: 16px; text-align: center; background: linear-gradient(120deg, rgba(98,220,134,.08), rgba(255,145,77,.08)); }
 .commentary-box p { margin: 0; font-weight: 760; }
-.lane-picker { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 14px; }
-.lane-button { position: relative; min-height: 118px; overflow: hidden; border: 1px solid rgba(255,255,255,.18); border-radius: 18px; color: var(--text); background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.09)), #174e31; cursor: pointer; font-weight: 900; }
-.lane-button::after { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(255,255,255,.22); border-radius: 11px; pointer-events: none; }
+.lane-picker { margin-top: 14px; }
+.match-pitch { position: relative; display: grid; grid-template-columns: repeat(3,1fr); gap: 0; min-height: 230px; overflow: hidden; padding: 12px; border: 2px solid rgba(255,255,255,.42); border-radius: 20px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 16.666%, rgba(255,255,255,.055) 16.666% 33.333%), #17613a; box-shadow: inset 0 0 0 5px rgba(255,255,255,.05); }
+.match-pitch::before { content: ""; position: absolute; inset: 50% auto auto 50%; width: 74px; height: 74px; border: 2px solid rgba(255,255,255,.3); border-radius: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+.lane-button { position: relative; min-height: 200px; overflow: hidden; border: 0; border-right: 1px dashed rgba(255,255,255,.32); border-radius: 0; color: var(--text); background: transparent; cursor: pointer; font-weight: 900; }
+.lane-button:last-child { border-right: 0; }
+.lane-button::after { content: ""; position: absolute; inset: 32px 9px 9px; border: 1px solid rgba(255,255,255,.17); border-radius: 11px; pointer-events: none; }
 .lane-button span { position: relative; z-index: 1; }
-.lane-button:hover { border-color: var(--yellow); background-color: #1e6740; }
-.handoff { grid-column: 1/-1; padding: 18px; border: 1px solid var(--line); border-radius: 16px; text-align: center; background: #0b1a12; }
+.lane-button:hover { background: rgba(232,214,106,.13); }
+.ball { position: absolute; z-index: 2; left: 50%; color: #fff; font-size: 1.4rem; font-style: normal; text-shadow: 0 3px 8px #000; transition: bottom .35s ease; }
+.handoff, .outcome { position: relative; z-index: 2; grid-column: 1/-1; align-self: center; justify-self: center; width: min(420px,90%); padding: 24px; border: 1px solid var(--line); border-radius: 18px; text-align: center; background: rgba(7,17,13,.94); box-shadow: var(--shadow); }
+.handoff span, .outcome span { display: block; margin-top: 8px; color: var(--muted); font-size: .86rem; }
 .handoff button { margin-top: 10px; }
+.outcome strong { display: block; color: var(--yellow); font-size: clamp(1.7rem,5vw,3rem); line-height: 1; }
+.outcome.goal strong { color: var(--green); }
+.outcome.recovery strong { color: var(--orange); }
+.outcome button { margin-top: 16px; }
+.obscured::after, .result-pitch::after { content: ""; position: absolute; inset: 0; background: rgba(7,17,13,.4); backdrop-filter: blur(3px); }
+.result-pitch .outcome, .obscured .handoff { position: relative; z-index: 3; }
 .progress-wrap { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 14px; }
 .attack-progress { padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: #0b1a12; }
 .attack-progress > div:first-child { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: .78rem; font-weight: 800; }
@@ -122,6 +137,7 @@ button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
   .match-state { min-width: 110px; }
   .power-grid { grid-template-columns: repeat(2,1fr); }
   .odds { grid-template-columns: 1fr; }
-  .lane-button { min-height: 92px; }
+  .match-pitch { min-height: 205px; padding: 8px; }
+  .lane-button { min-height: 185px; font-size: .75rem; }
   .progress-wrap { grid-template-columns: 1fr; }
 }
