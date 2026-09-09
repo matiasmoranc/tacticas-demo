@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10281d">
+  <title>Laboratorio táctico · Mercado Élite 5</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Mercado Élite 5 · prototipo</p>
+        <h1>Laboratorio táctico</h1>
+        <p class="intro">Distribuí los cuatro jugadores, compará fuerzas y comprobá cuánto pesa tu estrategia frente a la calidad del plantel.</p>
+      </div>
+      <button class="ghost" id="resetBtn" type="button">Reiniciar demo</button>
+    </header>
+
+    <section class="rules-strip" aria-label="Reglas rápidas">
+      <span><b>15</b> formaciones posibles</span>
+      <span><b>1</b> cambio táctico por equipo</span>
+      <span><b>8</b> ataques por equipo</span>
+      <span>Una línea vacía queda <b>casi anulada</b></span>
+    </section>
+
+    <section class="scoreboard" aria-live="polite">
+      <div><small id="scoreNameA">Verdes</small><strong id="scoreA">0</strong></div>
+      <div class="match-state"><span id="roundLabel">Preparación</span><b id="scoreDivider">—</b><small id="statusText">Armá ambos equipos</small></div>
+      <div><small id="scoreNameB">Naranjas</small><strong id="scoreB">0</strong></div>
+    </section>
+
+    <section class="teams" id="teams"></section>
+
+    <section class="comparison">
+      <div class="section-heading">
+        <div><p class="eyebrow">Lectura previa</p><h2>Duelo de fuerzas</h2></div>
+        <p>Los valores cambian inmediatamente cuando movés un jugador.</p>
+      </div>
+      <div class="duels" id="duels"></div>
+    </section>
+
+    <section class="match-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">Simulación</p><h2>Probalo en partido</h2></div>
+        <button class="primary" id="playBtn" type="button">Comenzar partido</button>
+      </div>
+      <div class="odds" id="odds"></div>
+      <div class="commentary-box" id="commentary" aria-live="polite">
+        <p>Acomodá los jugadores y comenzá el partido. Cada ronda genera un ataque por equipo.</p>
+      </div>
+      <div class="event-log" id="eventLog"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
