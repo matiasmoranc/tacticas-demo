@@ -20,8 +20,8 @@
 
     <section class="rules-strip" aria-label="Reglas rápidas">
       <span><b>15</b> formaciones posibles</span>
-      <span><b>1</b> cambio táctico por equipo</span>
-      <span><b>8</b> ataques por equipo</span>
+      <span>Elegí jugador y después <b>zona</b></span>
+      <span>Partido por <b>turnos</b></span>
       <span>Una línea vacía queda <b>casi anulada</b></span>
     </section>
 
@@ -43,13 +43,15 @@
 
     <section class="match-panel">
       <div class="section-heading">
-        <div><p class="eyebrow">Simulación</p><h2>Probalo en partido</h2></div>
+        <div><p class="eyebrow">Partido por turnos</p><h2>Elegí dónde atacar y defender</h2></div>
         <button class="primary" id="playBtn" type="button">Comenzar partido</button>
       </div>
       <div class="odds" id="odds"></div>
       <div class="commentary-box" id="commentary" aria-live="polite">
-        <p>Acomodá los jugadores y comenzá el partido. Cada ronda genera un ataque por equipo.</p>
+        <p>Acomodá los jugadores y comenzá el partido.</p>
       </div>
+      <div class="lane-picker" id="lanePicker"></div>
+      <div class="progress-wrap" id="progressWrap"></div>
       <div class="event-log" id="eventLog"></div>
     </section>
   </main>
