@@ -11,6 +11,7 @@ Demo independiente para probar el sistema de formaciones libres antes de integra
 - El mediocampo aporta un 30% a ataque y defensa.
 - El arquero aporta un 15% a la defensa.
 - La calidad original del plantel genera una ventaja de 0, 3, 5 o 7 puntos.
-- Un cambio táctico por equipo después de comenzar el partido.
+- Selección del jugador y colocación directa en una zona visual de la cancha.
+- Partido local por turnos: ataque secreto, elección defensiva, avances, recuperaciones y goles.
 
 La versión publicable está en `dist/`.
